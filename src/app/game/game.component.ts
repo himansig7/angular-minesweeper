@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 const directions = [
-
-  {x:-1, y:-1 } , // UP + LEFT
-  {x:0, y:-1 } , // UP  
-  {x:1, y:-1 } , // UP RIGHT
-  {x:-1, y:0 } , // LEFT
-  {x:1, y:0 } , // RIGHT
-  {x:-1, y:1 } , // DOWN LEFT
-  {x:0, y:1 } , // DOWN
-  {x:1, y:1 }  // DOWN RIGHT
-
+  { x: -1, y: -1 }, // UP + LEFT
+  { x: 0, y: -1 }, // UP
+  { x: 1, y: -1 }, // UP RIGHT
+  { x: -1, y: 0 }, // LEFT
+  { x: 1, y: 0 }, // RIGHT
+  { x: -1, y: 1 }, // DOWN LEFT
+  { x: 0, y: 1 }, // DOWN
+  { x: 1, y: 1 }, // DOWN RIGHT
 ];
 
 class Cell {
@@ -59,16 +57,72 @@ class Board {
     }
   }
 
-  openCells(row, col){
-    if(row<0 || row>=this.rows || col<0 || col>=this.cols){
+  openCells(row, col) {
+    if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
       return;
     }
-    let cell = this.matrix[row][col];
+    let cell: Cell = this.matrix[row][col];
+    if (cell.mine || cell.open) return;
+
     cell.open = true;
 
-    for(let d of directions){
-      this.openCells(row+d.x , col+d.y);
+    if (cell.neighbors == 0) {
+      for (let d of directions) {
+        this.openCells(row + d.x, col + d.y);
+      }
     }
+  }
+
+  calcNeighborsOfAllCells() {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        this.calcNeighborsOfOneCell(i, j);
+      }
+    }
+  }
+
+  openAllCells() {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        let cell = this.matrix[i][j];
+        cell.open = true;
+      }
+    }
+  }
+
+  onClickCell(row, col) {
+    let cell = this.matrix[row][col];
+    if (cell.mine) {
+      this.openAllCells();
+      alert('game over');
+      return;
+    }
+    this.openCells(row, col);
+  }
+
+  calcNeighborsOfOneCell(row:number, col:number) {
+    let count:number = 0;
+    for (let d of directions) {
+      let r = row + d.x;
+      let c = col + d.y;
+      if (r < 0 || r >= this.rows || c < 0 || c >= this.cols) {
+        continue;
+      }
+      let cell = this.matrix[r][c];
+      if (cell.mine == true) {
+        count++;
+      }
+    }
+    let currentCell: Cell = this.matrix[row][col];
+    currentCell.neighbors = count;
+  }
+
+  flagCell(row, col){
+    let cell = this.matrix[row][col]
+    if(cell.open){
+      return;
+    }
+    cell.flag = true
   }
 }
 
