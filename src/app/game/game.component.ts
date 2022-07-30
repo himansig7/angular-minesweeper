@@ -95,7 +95,7 @@ class Board {
     }
   }
 
-  onClickCell(row, col) {
+  public onClickCell(row, col) {
     let cell = this.matrix[row][col];
     if (cell.mine) {
       this.openAllCells();
@@ -137,7 +137,14 @@ class Board {
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  constructor() {}
+  board : Board = new Board();
+ // yourBoard : Board = new Board();
+  
+  
+  constructor() {
+    this.board.initBoard(5,5)
+  }
+
 
   ngOnInit() {}
 }
