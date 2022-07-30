@@ -147,4 +147,9 @@ export class GameComponent implements OnInit {
 
 
   ngOnInit() {}
+
+
+  onClick(i,j){
+    this.board.onClickCell(i,j) 
+  }
 }
