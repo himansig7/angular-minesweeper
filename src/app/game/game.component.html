@@ -1,9 +1,20 @@
 <div>Game 1</div>
 <div *ngFor="let row of board.matrix; index as i">
-  <span *ngFor="let cell of row; index as j">
+  <span *ngFor="let cell of row; index as j" class="cell" >
     <button *ngIf="!cell.open" (click)="onClick(i, j)">&nbsp;</button>
+    <button *ngIf="cell.open" >
     <span *ngIf="cell.open">
-      {{ cell.neighbors }}
+    
+        <span *ngIf="cell.mine">
+          m
+        </span>
+        <span *ngIf="!cell.mine && cell.neighbors>0">
+          {{ cell.neighbors }}
+        </span>
+        &nbsp;
+      
+    
     </span>
+  </button>
   </span>
 </div>
