@@ -148,7 +148,11 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {}
 
+  onRightClick($event,i,j ){
 
+    this.board.flagCell(i,j);
+  
+  }
   onClick(i,j){
     this.board.onClickCell(i,j) 
   }
