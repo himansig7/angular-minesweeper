@@ -25,7 +25,12 @@ class Board {
   mines: number;
   matrix: any;
 
-  makeBoard(rows, cols) {
+  public initBoard(rows, cols){
+    this.makeBoard(rows, cols);
+    this.makeMines();
+    this.calcNeighborsOfAllCells();
+  }
+  private makeBoard(rows, cols) {
     this.rows = rows;
     this.cols = cols;
     this.cells = rows * cols;
@@ -42,7 +47,7 @@ class Board {
     }
   }
 
-  makeMines() {
+  private makeMines() {
     let count = 0;
     while (count < this.mines) {
       let row = Math.floor(Math.random() * this.rows * 0.9999);
@@ -73,7 +78,7 @@ class Board {
     }
   }
 
-  calcNeighborsOfAllCells() {
+  private calcNeighborsOfAllCells() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         this.calcNeighborsOfOneCell(i, j);
@@ -100,7 +105,7 @@ class Board {
     this.openCells(row, col);
   }
 
-  calcNeighborsOfOneCell(row:number, col:number) {
+  private calcNeighborsOfOneCell(row:number, col:number) {
     let count:number = 0;
     for (let d of directions) {
       let r = row + d.x;
@@ -117,7 +122,7 @@ class Board {
     currentCell.neighbors = count;
   }
 
-  flagCell(row, col){
+  public flagCell(row, col){
     let cell = this.matrix[row][col]
     if(cell.open){
       return;
