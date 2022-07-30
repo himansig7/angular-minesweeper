@@ -1,6 +1,6 @@
 .cell,
 button {
   display: inline-block;
-  min-height: 10px;
-  min-width: 10px;
+  min-height: 45px;
+  min-width: 45px;
 }

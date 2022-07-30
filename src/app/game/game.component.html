@@ -6,9 +6,8 @@
       (click)="onClick(i, j)"
       (contextmenu)="onRightClick($event, i, j); (false)"
     >
-      &nbsp;
-
-      <span *ngIf="cell.flag"> F </span>
+      <span *ngIf="cell.flag"> 🎌 </span>
+      <span *ngIf="!cell.flag"> &nbsp; </span>
     </button>
     <button *ngIf="cell.open">
       <span *ngIf="cell.open">

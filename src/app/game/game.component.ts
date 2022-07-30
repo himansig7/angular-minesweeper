@@ -25,7 +25,7 @@ class Board {
   mines: number;
   matrix: any;
 
-  public initBoard(rows, cols){
+  public initBoard(rows, cols) {
     this.makeBoard(rows, cols);
     this.makeMines();
     this.calcNeighborsOfAllCells();
@@ -105,8 +105,8 @@ class Board {
     this.openCells(row, col);
   }
 
-  private calcNeighborsOfOneCell(row:number, col:number) {
-    let count:number = 0;
+  private calcNeighborsOfOneCell(row: number, col: number) {
+    let count: number = 0;
     for (let d of directions) {
       let r = row + d.x;
       let c = col + d.y;
@@ -122,12 +122,12 @@ class Board {
     currentCell.neighbors = count;
   }
 
-  public flagCell(row, col){
-    let cell = this.matrix[row][col]
-    if(cell.open){
+  public flagCell(row, col) {
+    let cell = this.matrix[row][col];
+    if (cell.open) {
       return;
     }
-    cell.flag = true
+    cell.flag = true;
   }
 }
 
@@ -137,23 +137,19 @@ class Board {
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  board : Board = new Board();
- // yourBoard : Board = new Board();
-  
-  
-  constructor() {
-    this.board.initBoard(10,10)
-  }
+  board: Board = new Board();
+  // yourBoard : Board = new Board();
 
+  constructor() {
+    this.board.initBoard(6, 6);
+  }
 
   ngOnInit() {}
 
-  onRightClick($event,i,j ){
-
-    this.board.flagCell(i,j);
-  
+  onRightClick($event, i, j) {
+    this.board.flagCell(i, j);
   }
-  onClick(i,j){
-    this.board.onClickCell(i,j) 
+  onClick(i, j) {
+    this.board.onClickCell(i, j);
   }
 }
