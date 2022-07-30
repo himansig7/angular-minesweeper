@@ -5,9 +5,15 @@
     
     (click)="onClick(i, j)"
     (contextmenu)="onRightClick($event,i,j ); false; " 
-  > 
+  
 
-    >&nbsp;</button>
+    >&nbsp;
+  
+    <span *ngIf="cell.flag">
+      F
+    </span>
+
+  </button>
     <button *ngIf="cell.open" >
     <span *ngIf="cell.open">
     

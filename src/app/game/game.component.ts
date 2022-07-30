@@ -142,7 +142,7 @@ export class GameComponent implements OnInit {
   
   
   constructor() {
-    this.board.initBoard(5,5)
+    this.board.initBoard(10,10)
   }
 
 
