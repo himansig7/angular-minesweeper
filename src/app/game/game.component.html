@@ -1,1 +1,8 @@
 <div>Game 1</div>
+<div *ngFor = "let row of board.matrix ; index as i">
+  <span *ngFor = "let cell of row ; index as j">
+    <button *ngIf = "!cell.open" click = "onClick(i,j)">
+      &nbsp;
+    </button>
+  </span>
+</div>
